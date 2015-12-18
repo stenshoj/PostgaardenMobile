@@ -1,6 +1,4 @@
 ﻿using Postgaarden.Model.Equipments;
-using SQLite;
-using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +22,6 @@ namespace Postgaarden.Model.Rooms
         /// The identifier.
         /// </value>
         [XmlElement("Id", Order = 1)]
-        [PrimaryKey]
         public int Id { get; set; }
 
         /// <summary>
@@ -33,7 +30,6 @@ namespace Postgaarden.Model.Rooms
         /// <value>
         /// The name.
         /// </value>
-        [Ignore]
         [XmlElement("Name", Order = 3)]
         public abstract String Name{ get; }
 
@@ -44,7 +40,6 @@ namespace Postgaarden.Model.Rooms
         /// The size.
         /// </value>
         [XmlElement("Size", Order = 2)]
-        [Column("Capacity")]
         public int Size { get; set; }
 
         /// <summary>
@@ -55,7 +50,6 @@ namespace Postgaarden.Model.Rooms
         /// </value>
         [XmlArray("Equipments", Order = 3)]
         [XmlArrayItem("Equipment")]
-        [OneToMany]
         public List<Equipment> Equipments { get; private set; }
 
 

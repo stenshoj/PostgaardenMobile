@@ -1,27 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mono;
+using Mono.Data.Sqlite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using System.IO;
 
 namespace Postgaarden.Connection.Sqlite
 {
     /*
         Developed by Chris Wohlert
     */
+    
     public class SqliteDatabaseConnection : DatabaseConnection
-    {
+    {        
         private static DatabaseConnection instance;
-        private SQLiteConnection sqlConnection;
+        private SqliteConnection sqlConnection;
         private bool isOpen;
+        string pathToDatabase;
+
+
+
+        public override void CreateDB()
+        {           
+            SqliteConnection.CreateFile(pathToDatabase);
+        }
 
         /// <summary>
         /// Prevents a default instance of the SqliteDatabaseConnection class from being created.
         /// </summary>
         private SqliteDatabaseConnection(string sqliteFilePath)
         {
-            sqlConnection = new SQLiteConnection("Data Source=" + sqliteFilePath + ";Version=3;");
+            pathToDatabase = sqliteFilePath;
+            if (!File.Exists(pathToDatabase))
+                CreateDB();
+            //else
+            //{
+            //    CreateDB();
+            //}            
+            sqlConnection = new SqliteConnection("Data Source=" + sqliteFilePath + ";Version=3;");            
         }
 
         /// <summary>
@@ -57,7 +75,7 @@ namespace Postgaarden.Connection.Sqlite
         {
             Open();
 
-            var command = new SQLiteCommand(sql, sqlConnection);
+            var command = new SqliteCommand(sql, sqlConnection);
             var reader = command.ExecuteReader();
             var sqlReturn = Read(reader).ToList();
 
@@ -71,7 +89,7 @@ namespace Postgaarden.Connection.Sqlite
         /// </summary>
         /// <param name="reader">The reader.</param>
         /// <returns></returns>
-        private IEnumerable<IEnumerable<object>> Read(SQLiteDataReader reader)
+        private IEnumerable<IEnumerable<object>> Read(SqliteDataReader reader)
         {
             while (reader.Read())
             {
@@ -94,6 +112,10 @@ namespace Postgaarden.Connection.Sqlite
         {
             if (instance == null) instance = new SqliteDatabaseConnection(sqliteFilePath);
             return instance;
+        }
+        public override void CreateTable(string sql)
+        {
+            ExecuteQuery(sql);
         }
     }
 }

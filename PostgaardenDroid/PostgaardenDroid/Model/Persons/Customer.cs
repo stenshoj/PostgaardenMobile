@@ -1,5 +1,4 @@
-﻿using SQLite;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +15,6 @@ namespace Postgaarden.Model.Persons
         private string cvr;
         private string companyName;
         
-        [PrimaryKey]
         [XmlElement("CVR")]
         public string Cvr
         {

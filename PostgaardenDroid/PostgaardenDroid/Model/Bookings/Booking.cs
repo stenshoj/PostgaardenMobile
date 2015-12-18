@@ -1,7 +1,5 @@
 ﻿using Postgaarden.Model.Persons;
 using Postgaarden.Model.Rooms;
-using SQLite;
-using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +15,6 @@ namespace Postgaarden
     public class Booking
     {
         [XmlElement("Id", Order = 1)]
-        [PrimaryKey, AutoIncrement]
         public int Id
         {
             get;
@@ -39,14 +36,12 @@ namespace Postgaarden
             set;
         }
         [XmlElement("Room", Order =7)]
-        [ForeignKey(typeof(ConferenceRoom)), Column("ConferenceRoom")]
         public Room Room
         {
             get;
             set;
         }
         [XmlElement("Employee", Order = 5)]
-        [ForeignKey(typeof(Employee))]
         public Person Employee
         {
             get;

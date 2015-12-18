@@ -25,5 +25,9 @@ namespace Postgaarden.Connection
         /// <param name="sql">The SQL.</param>
         /// <returns></returns>
         public abstract IEnumerable<IEnumerable<object>> ExecuteQuery(string sql);
+
+        public abstract void CreateDB();
+
+        public abstract void CreateTable(string sql);
     }
 }

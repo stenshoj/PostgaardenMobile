@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
+    <Reference Include="Mono.Data.Sqlite" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,7 +55,6 @@
     <Compile Include="Connection\Sqlite\SqliteDatabaseConnection.cs" />
     <Compile Include="Crud\Bookings\BookingCrud.cs" />
     <Compile Include="Crud\Bookings\SqliteBookingCrud.cs" />
-    <Compile Include="Crud\ConfirmationEmail\MailBuilder.cs" />
     <Compile Include="Crud\Crud.cs" />
     <Compile Include="Crud\Equipments\EquipmentCrud.cs" />
     <Compile Include="Crud\Equipments\SqliteEquipmentCrud.cs" />
@@ -66,13 +66,10 @@
     <Compile Include="Crud\Rooms\SqliteRoomCrud.cs" />
     <Compile Include="Crud\Users\SqliteUserCrud.cs" />
     <Compile Include="Crud\Users\UserCrud.cs" />
-    <Compile Include="Mail\MailBuilder.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Model\Bookings\Booking.cs" />
     <Compile Include="Model\Bookings\BookingHandler.cs" />
     <Compile Include="Model\Bookings\BookingXmlExport.cs" />
-    <Compile Include="Model\ConfirmationEmail\Mailtemplate.cs" />
-    <Compile Include="Model\EmailConfirmation\Mailtemplate.cs" />
     <Compile Include="Model\Equipments\Equipment.cs" />
     <Compile Include="Model\Persons\Customer.cs" />
     <Compile Include="Model\Persons\Employee.cs" />
@@ -103,7 +100,11 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Crud\ConfirmationEmail\" />
     <Folder Include="Crud\EmailConfirmation\" />
+    <Folder Include="Mail\" />
+    <Folder Include="Model\ConfirmationEmail\" />
+    <Folder Include="Model\EmailConfirmation\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
